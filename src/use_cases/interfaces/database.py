@@ -17,42 +17,45 @@ class IDBRepository(ABC):
         pass
 
     @abstractmethod
-    async def delete(obj_id: int) -> bool:
-        pass
-
-    @abstractmethod
-    async def get(filters: dict) -> Any:
-        pass
-
-    @abstractmethod
-    async def get_by_id(obj_id: int) -> Any:
-        pass
-
-    @abstractmethod
-    async def get_all() -> List[Any]:
-        pass
-
-    @abstractmethod
-    async def get_by_status(status: str) -> List[Any]:
-        pass
-
-    @abstractmethod
-    async def get_by_filters(filters: dict) -> Any:
-        pass
-
-    @abstractmethod
     async def update_filter(filters: dict, obj: Any) -> Any:
         pass
 
     @abstractmethod
-    async def get_potential_objs(window_frame: timedelta) -> List[Any]:
+    async def get(filters: dict, **kwarg) -> Any:
         pass
 
-    async def model_to_json(self, obj: Any) -> Any:
+    @abstractmethod
+    async def get_by_id(obj_id: int, **kwarg) -> Any:
         pass
 
-    async def model_to_dict(self, obj: Any) -> Any:
+    @abstractmethod
+    async def get_all(**kwarg) -> List[Any]:
         pass
 
-    async def model_to_obj(self, obj: Any) -> Any:
-        return
+    @abstractmethod
+    async def get_all_by_filters(filters: dict, **kwarg) -> Any:
+        pass
+
+    @abstractmethod
+    async def delete(obj_id: int) -> bool:
+        pass
+
+    @abstractmethod
+    async def model_to_json(obj: Any) -> Any:
+        pass
+
+    @abstractmethod
+    async def model_to_dict(obj: Any) -> Any:
+        pass
+
+    @abstractmethod
+    async def model_to_obj(obj: Any) -> Any:
+        pass
+
+
+class IUserDBRepository(IDBRepository):
+    pass
+class IInteractionDBRepository(IDBRepository):
+    pass
+class IMessageDBRepository(IDBRepository):
+    pass
