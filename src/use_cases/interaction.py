@@ -3,7 +3,7 @@ from src.use_cases.interfaces.database import IMessageDBRepository
 import asyncio
 from src.utils.basic_logger import simple_logger as logger
 from src.entities.interaction import Interaction
-from typing import Union
+from typing import Union, List
 
 
 class InteractionUseCase:

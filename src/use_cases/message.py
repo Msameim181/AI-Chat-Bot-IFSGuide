@@ -5,7 +5,7 @@ from src.use_cases.exceptions import UserNotAuthorized, InteractionNotFound
 import asyncio
 from src.utils.basic_logger import simple_logger as logger
 from src.entities.message import Message, RoleType
-from typing import Union
+from typing import Union, List
 
 
 class MessageUseCase:
