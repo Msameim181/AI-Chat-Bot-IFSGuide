@@ -3,7 +3,7 @@ from typing import Union
 
 class CreateMessage(BaseModel):
     interaction_id: Union[str, int]
-    content: str
+    message: str
 
 
 class FetchAllMessages(BaseModel):
