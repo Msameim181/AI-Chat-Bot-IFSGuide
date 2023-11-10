@@ -36,7 +36,7 @@ class ColoredFormatter(logging.Formatter):
         return super(ColoredFormatter, self).format(record) + self.splitter
 
 
-def simple_logger(name, stream_level=logging.DEBUG, file_level=logging.DEBUG, filename: str = ""):
+def simple_logger(name:str = "Base-Logger", stream_level=logging.DEBUG, file_level=logging.DEBUG, filename: str = ""):
     logger = logging.getLogger(name)
     file_format = '[%(levelname)s] %(asctime)s-FILENAME:%(filename)s-MODULE:%(module)s-FUNC:%(funcName)s-THREAD:%(threadName)s-LINE:%(lineno)d :: \n%(message)s'
     console_format = '[%(levelname)s] %(asctime)s-FILENAME:%(filename)s-MODULE:%(module)s-FUNC:%(funcName)s-THREAD:%(threadName)s-LINE:%(lineno)d :: \n%(message)s'
@@ -72,6 +72,7 @@ def set_logger_settings(handler, level, formatter, logger):
 
 if __name__ == '__main__':
     logger = simple_logger('test_logger')
+    logger.info(logger.name)
     logger.debug('this is the test debug message to show you')
     logger.info('this is the test info message to show you')
     logger.warning('this is the test warning message to show you')
