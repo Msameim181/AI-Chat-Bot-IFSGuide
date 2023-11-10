@@ -1,30 +1,28 @@
+import json
 import multiprocessing
-from typing import Any, Annotated, Union
 import uvicorn
+import jwt
+from typing import Annotated, Union
+
 from fastapi import (
     FastAPI,
     Depends,
-    UploadFile,
-    File,
     HTTPException,
     status,
     Request,
-    Form,
 )
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm, OAuth2
-from fastapi.security import OAuth2PasswordRequestForm
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+
 from dependencies import container  # noqa
 from src.config import service_config as service_config
+from src.entities import User, RoleType, Interaction, Message
 from src.frameworks.api.configs.fastapi_doc import (
     fastapi_information,
     fastapi_tags_metadata,
 )
-from src.utils.basic_logger import simple_logger as logger
-import jwt
+from src.frameworks.api.schemas.message import CreateMessage
 from src.frameworks.api.schemas.user import UserSignup
-from src.frameworks.api.schemas.message import CreateMessage, FetchAllMessages
-from src.entities import User, RoleType, Interaction, Message
 from src.use_cases import UserUseCase, InteractionUseCase, MessageUseCase
 from src.use_cases.exceptions import (
     UserNotAuthorized,
@@ -32,8 +30,7 @@ from src.use_cases.exceptions import (
     UserNotFound,
     AIFailedToRespond,
 )
-
-import json
+from src.utils.basic_logger import simple_logger as logger
 
 
 class FastAPIConfig:
@@ -75,16 +72,23 @@ class APIEndpoint:
     def create_rest_api_app(self, information, tags_metadata) -> None:
         self.rest_api_app = FastAPI(**information, openapi_tags=tags_metadata)
 
-    def start_rest_api_app(self) -> None:
+    def start_rest_api_app(self, main_process: bool = False) -> None:
         self.logger.info("Starting API Endpoint...")
-        self.rest_api_process = multiprocessing.Process(
-            target=uvicorn.run,
-            kwargs={
-                "app": self.rest_api_app,
-                "host": service_config.SERVICE_HOST,
-                "port": int(service_config.SERVICE_PORT),
-            },
-        ).start()
+        if main_process:
+            uvicorn.run(
+                self.rest_api_app,
+                host=service_config.SERVICE_HOST,
+                port=int(service_config.SERVICE_PORT),
+            )
+        else:
+            self.rest_api_process = multiprocessing.Process(
+                target=uvicorn.run,
+                kwargs={
+                    "app": self.rest_api_app,
+                    "host": service_config.SERVICE_HOST,
+                    "port": int(service_config.SERVICE_PORT),
+                },
+            ).start()
 
     def create_rest_api_route(self):
         if self.rest_api_app is None:
@@ -99,9 +103,8 @@ class APIEndpoint:
         )
         async def main(request: Request):
             """Check the Status of the Service."""
-            return JSONResponse(
-                status_code=status.HTTP_200_OK, content={"message": "Success"}
-            )
+            # redirect to docs
+            return RedirectResponse(url="/docs")
 
         @self.rest_api_app.post(
             "/signup",
