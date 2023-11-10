@@ -1,6 +1,5 @@
 from dependencies import container
 from lagom import Singleton
-from src import config
 
 from src.frameworks.api import APIEndpoint
 from src.utils.basic_logger import simple_logger as logger
@@ -14,8 +13,13 @@ from src.use_cases.interfaces.database import (
     IInteractionDBRepository,
     IMessageDBRepository,
 )
+from src.use_cases import (
+    UserUseCase,
+    InteractionUseCase,
+    MessageUseCase,
+    AIServiceUseCase,
+)
 
-# from src.use_cases.sample import SampleUseCase
 
 # Config
 container[logger] = logger("AI-Chat-Bot-IFSGuide-Service-TEST")
@@ -27,7 +31,10 @@ container[IMessageDBRepository] = Singleton(MessageDBRepository)
 
 # Use Cases
 # Must be added in the order of dependency
-# container[SampleUseCase] = Singleton(SampleUseCase)
+container[UserUseCase] = Singleton(UserUseCase)
+container[InteractionUseCase] = Singleton(InteractionUseCase)
+container[MessageUseCase] = Singleton(MessageUseCase)
+container[AIServiceUseCase] = Singleton(AIServiceUseCase)
 
 # Subscribers
 container[APIEndpoint] = Singleton(APIEndpoint)
