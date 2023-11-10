@@ -38,6 +38,7 @@ jobs:
 
     - name: Run tests
       run: |
+        cd /home/runner/work/AI-Chat-Bot-IFSGuide/AI-Chat-Bot-IFSGuide
         pytest
 
     - name: Build and run Docker image
