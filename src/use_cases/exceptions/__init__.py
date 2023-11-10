@@ -28,3 +28,6 @@ class InteractionNotFound(Exception):
 
 class InformationIsNotValid(Exception):
     pass
+
+class AIFailedToRespond(Exception):
+    pass
