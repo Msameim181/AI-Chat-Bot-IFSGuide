@@ -1,0 +1,1 @@
+from src.entities.user_info import UserInfo # noqa

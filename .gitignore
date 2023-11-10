@@ -1,0 +1,15 @@
+.idea/
+__pycache__
+media
+*.sqlite3
+venv/
+*.env
+!.env.example
+.pytest_cache/
+scylladb/scylla/
+rabbitmq_data/
+data/rabbitmq_data/
+data/postgres/
+media/
+
+

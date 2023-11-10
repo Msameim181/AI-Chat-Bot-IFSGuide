@@ -1,0 +1,43 @@
+version: '3'
+
+networks:
+  ai_chat_bot_service_network:
+    external: true
+  auth_shared_network:
+    external: true
+  
+
+services:
+  postgres_service:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    env_file:
+      - ./src/config_files/database.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres/:/var/lib/postgresql/data/
+    networks:
+      - ai_chat_bot_service_network
+    hostname: postgres
+
+  ai_chat_bot_service:
+    image: ai_chat_bot_service:latest
+    container_name: ai_chat_bot_service
+    restart: always
+    ports:
+      - "6601:6601"
+    volumes:
+      - ./:/app/
+    command: >
+      bash -c "sleep 5 && python3 -m manage makemigrations &&
+               python3 -m manage migrate &&
+               python3 main.py"
+    depends_on:
+      - postgres_service
+    networks:
+      - ai_chat_bot_service_network
+    hostname: ai_chat_bot_service
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
