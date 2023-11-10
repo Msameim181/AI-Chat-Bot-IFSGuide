@@ -30,17 +30,16 @@ jobs:
         echo "SERVICE_HOST=0.0.0.0" >> src/config_files/service.env
         echo "SERVICE_PORT=6601" >> src/config_files/service.env
         echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> src/config_files/service.env
-        echo src/config_files/database.env
         
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt
 
     - name: Run tests
       run: |
-        cd /home/runner/work/AI-Chat-Bot-IFSGuide/AI-Chat-Bot-IFSGuide
-        pytest
+        docker build . -t ai_chat_bot_service:latest
+        docker run --rm -it -v ./:/app ai_chat_bot_service:latest pytest
 
     - name: Build and run Docker image
       run: |
