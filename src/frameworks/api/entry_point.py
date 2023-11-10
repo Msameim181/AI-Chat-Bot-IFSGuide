@@ -125,7 +125,8 @@ class APIEndpoint:
                     content={"message": "Failed to create user"},
                 )
             return JSONResponse(
-                status_code=status.HTTP_200_OK, content={"message": "Success, user created. Please login to continue."}
+                status_code=status.HTTP_200_OK,
+                content={"message": "Success, user created. Please login to continue."},
             )
 
         @self.rest_api_app.post(
@@ -166,7 +167,8 @@ class APIEndpoint:
                 user_data, service_config.JWT_SECRET_KEY, algorithm="HS256"
             )
             return JSONResponse(
-                status_code=status.HTTP_200_OK, content={"access_token": token, "token_type": "bearer"}
+                status_code=status.HTTP_200_OK,
+                content={"access_token": token, "token_type": "bearer"},
             )
 
         @self.rest_api_app.get(
@@ -217,7 +219,10 @@ class APIEndpoint:
                 )
             return JSONResponse(
                 status_code=status.HTTP_200_OK,
-                content={"message": "Success, interaction created.", "interaction_id": response.id},
+                content={
+                    "message": "Success, interaction created.",
+                    "interaction_id": response.id,
+                },
             )
 
         @self.rest_api_app.get(
