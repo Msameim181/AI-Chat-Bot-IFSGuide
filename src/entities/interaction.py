@@ -8,7 +8,7 @@ def current_time():
 
 def settings():
     return {
-        "model_name": "GPT4",
+        "model_name": "gpt-4",
         "role": "System",
         "prompt": "As a helpful IFS therapist chatbot, your role is to guide users through a "
         "simulated IFS session in a safe and supportive manner with a few changes to the exact steps of the IFS model.",
