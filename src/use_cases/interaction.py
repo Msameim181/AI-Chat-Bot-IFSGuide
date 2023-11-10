@@ -90,8 +90,6 @@ class InteractionUseCase:
             messages = interaction.messages.all()
             temp_interaction = await self.database_repository.model_to_json(interaction)
             temp_interaction["messages"] = []
-            if messages is None or not messages:
-                continue
             for message in messages:
                 temp_message = await self.message_database_repository.model_to_json(
                     message
