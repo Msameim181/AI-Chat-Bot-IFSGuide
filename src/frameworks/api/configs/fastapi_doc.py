@@ -1,11 +1,11 @@
 
 description = """
-... Service is a ... .
+AI Chat Bot for IFS Guide
 
 """
 
 fastapi_information = {
-    "title": "Service",
+    "title": "IFS Guide AI ChatBot Service",
     "description": description,
     "version": "0.0.1",
     "terms_of_service": "http://example.com/terms/",
@@ -20,13 +20,27 @@ fastapi_information = {
     },
 }
 
-#   GET     /
-#   GET     /job/
 
 fastapi_tags_metadata = [
     {
         "name": "Main",
         "description": "Check the Status.",
+    },
+    {
+        "name": "AuthCheck",
+        "description": "Check the Authentication.",
+    },
+    {
+        "name": "User",
+        "description": "User related endpoints.",
+    },
+    {
+        "name": "Interaction",
+        "description": "Interaction related endpoints.",
+    },
+    {
+        "name": "Message",
+        "description": "Message related endpoints.",
     },
     
 
