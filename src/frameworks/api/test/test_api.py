@@ -155,7 +155,7 @@ async def test_06_fetch_all_messages(request_header):
     response_json = response.json()
     assert response_json["messages"] is not None
     data_json = json.loads(response_json["messages"])
-    assert len(data_json) == 2
+    assert len(data_json) == 4
 
 
 @pytest.mark.order(11)
@@ -188,4 +188,4 @@ async def test_08_fetch_all_interactions(request_header):
     assert response_json["interactions"] is not None
     data_json = json.loads(response_json["interactions"])
     assert len(data_json) == 1
-    assert len(data_json[0]['messages']) == 2
+    assert len(data_json[0]['messages']) == 4

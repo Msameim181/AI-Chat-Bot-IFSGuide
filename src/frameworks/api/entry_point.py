@@ -30,6 +30,7 @@ from src.use_cases.exceptions import (
     UserNotAuthorized,
     InteractionNotFound,
     UserNotFound,
+    AIFailedToRespond,
 )
 
 import json
@@ -282,6 +283,7 @@ class APIEndpoint:
                         content=form_data.message,
                     ),
                     user_id=user_data["id"],
+                    will_ai_respond=True,
                 )
             except InteractionNotFound as e:
                 raise HTTPException(
@@ -292,6 +294,11 @@ class APIEndpoint:
                 raise HTTPException(
                     status_code=status.HTTP_401_UNAUTHORIZED,
                     detail=f"User not authorized. Error: {e}",
+                )
+            except AIFailedToRespond as e:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=f"AI failed to respond. Error: {e}",
                 )
             except Exception as e:
                 return JSONResponse(
