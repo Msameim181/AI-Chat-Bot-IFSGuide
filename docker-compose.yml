@@ -3,19 +3,17 @@ version: '3'
 networks:
   ai_chat_bot_service_network:
     external: true
-  auth_shared_network:
-    external: true
   
 
 services:
-  postgres_service:
+  postgres_chat_bot_service:
     image: postgres:latest
-    container_name: postgres
+    container_name: postgres_chat_bot
     restart: always
     env_file:
       - ./src/config_files/database.env
     ports:
-      - "5432:5432"
+      - "65432:5432"
     volumes:
       - ./data/postgres/:/var/lib/postgresql/data/
     networks:
@@ -35,7 +33,7 @@ services:
                python3 -m manage migrate &&
                python3 main.py"
     depends_on:
-      - postgres_service
+      - postgres_chat_bot_service
     networks:
       - ai_chat_bot_service_network
     hostname: ai_chat_bot_service
