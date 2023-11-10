@@ -19,6 +19,6 @@ def settings():
 class Interaction:
     id: str
     user_id: str
+    settings: dict = field(default_factory=settings)
     created_at: datetime = field(default_factory=current_time)
     updated_at: datetime = field(default_factory=current_time)
-    settings: dict = field(default_factory=settings)
