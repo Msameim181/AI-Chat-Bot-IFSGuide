@@ -42,12 +42,13 @@ def message_repository() -> MessageDBRepository:
 @pytest.mark.asyncio
 async def test_1_create(user_repository, interaction_repository, message_repository):
     users = await user_repository.get_all()
-    assert len(users) == 1
+    assert len(users) == 2
     interactions = await interaction_repository.get_all()
-    assert len(interactions) == 1
+    assert len(interactions) == 2
     messages = await message_repository.get_all()
-    assert len(messages) == 2
+    assert len(messages) == 4
     await user_repository.delete(users[0].id)
+    await user_repository.delete(users[1].id)
     users = await user_repository.get_all()
     assert len(users) == 0
     interactions = await interaction_repository.get_all()
