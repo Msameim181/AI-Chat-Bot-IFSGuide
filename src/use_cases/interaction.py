@@ -37,7 +37,7 @@ class InteractionUseCase:
             return None
         return await self.database_repository.model_to_obj(interaction)
 
-    async def get_all_interactions(self) -> list[Interaction]:
+    async def get_all_interactions(self) -> List[Interaction]:
         interactions = await self.database_repository.get_all()
         if interactions is None or not interactions:
             return None

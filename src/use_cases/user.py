@@ -3,7 +3,7 @@ import asyncio
 from src.utils.basic_logger import simple_logger as logger
 from src.entities.user import User
 from src.use_cases.exceptions import UserNotAuthorized, UserNotFound
-from typing import Union
+from typing import Union, List
 import bcrypt
 
 
@@ -41,7 +41,7 @@ class UserUseCase:
             return None
         return await self.database_repository.model_to_obj(user)
 
-    async def get_all_users(self) -> list[User]:
+    async def get_all_users(self) -> List[User]:
         users = await self.database_repository.get_all()
         if users is None or not users:
             return None

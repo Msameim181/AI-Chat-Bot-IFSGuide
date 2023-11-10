@@ -42,7 +42,7 @@ class MessageUseCase:
     def sync_execute(self, **kwargs) -> None:
         asyncio.run(self.execute_job(**kwargs))
 
-    async def prepare_messages(self, messages: list[Message]) -> Message:
+    async def prepare_messages(self, messages: List[Message]) -> Message:
         return [
             {"role": message.role, "content": message.content} for message in messages
         ]
@@ -78,7 +78,7 @@ class MessageUseCase:
             return None
         return await self.database_repository.model_to_obj(message)
 
-    async def get_all_messages(self) -> list[Message]:
+    async def get_all_messages(self) -> List[Message]:
         messages = await self.database_repository.get_all()
         if messages is None or not messages:
             return None
