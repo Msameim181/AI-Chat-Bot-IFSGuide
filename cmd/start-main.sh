@@ -1,7 +1,7 @@
 #!/bin/bash
-export PROJECTNAME=AI-Chat-Bot-IFSGuide_service
-export NETWORKNAME=AI-Chat-Bot-IFSGuide_service_network
-export HOSTNAME=AI-Chat-Bot-IFSGuide_service
+export PROJECTNAME=ai_chat_bot_service
+export NETWORKNAME=ai_chat_bot_service_network
+export HOSTNAME=ai_chat_bot_service
 export PORT=6601
 docker run --rm -it \
       --name $PROJECTNAME \
@@ -9,4 +9,4 @@ docker run --rm -it \
       -v ./:/app \
       --network $NETWORKNAME \
       --hostname $HOSTNAME \
-      AI-Chat-Bot-IFSGuide_service:latest
+      ai_chat_bot_service:latest

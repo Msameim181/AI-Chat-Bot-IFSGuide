@@ -1,1 +1,1 @@
-docker build -t AI-Chat-Bot-IFSGuide_service:latest .
+docker build -t ai_chat_bot_service:latest .
