@@ -46,7 +46,7 @@ async def test_1_create(user_repository, interaction_repository, message_reposit
     interactions = await interaction_repository.get_all()
     assert len(interactions) == 2
     messages = await message_repository.get_all()
-    assert len(messages) == 4
+    assert len(messages) == 8
     await user_repository.delete(users[0].id)
     await user_repository.delete(users[1].id)
     users = await user_repository.get_all()
