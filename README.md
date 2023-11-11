@@ -1,5 +1,18 @@
 # AI-Chat-Bot-IFSGuide
 
+## Table of Contents
+
+- [Description](#description)
+- [Features](#features)
+- [Requirements](#requirements)
+- [How to Run](#how-to-run)
+    - [Using Docker](#using-docker)
+    - [Using Python](#using-python)
+- [Architecture](#architecture)
+- [Folder Structure](#folder-structure)
+
+---
+
 ## Description
 
 This is a simple app to perform as an AI chatbot for IFS Guide. It is built using FastAPI and Python 3. It is designed using the Clean Architecture design pattern.
@@ -13,6 +26,7 @@ The AI side is provided by a free library called [GPT4Free](https://github.com/x
 - Web framework layer using FastAPI
 - Modular and flexible architecture
 - Examples of common features such as authentication, authorization, and CRUD operations
+- See the [architecture](#architecture)
 
 ## Requirements
 
@@ -73,7 +87,10 @@ pip install -r requirements.txt
 pytest
 ```
 
-## folder structure
+## Architecture
+![Architecture](data/docs/AI-Chat-Bot-IFSGuide-Structure.png)
+
+## Folder Structure
 
 ```
 └── app
